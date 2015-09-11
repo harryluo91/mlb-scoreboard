@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" ng-app="mlbApp">
+<head>
+  <meta charset="utf-8">
+  <title>MLB Scoreboard</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+  <script src="js/angular-resource.min.js"></script>
+  <script src="js/service.js"></script>
+  <script src="js/main.js"></script>
+
+</head>
+<body ng-controller="scoreboardController" style="text-align: center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true" ng-click="prevDate()"></span>
+        <span>Date: <input type="text" id="datepicker"></span>
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true" ng-click="nextDate()"></span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container" ng-repeat="game in scoreboards">
+    <div class="row">
+      <div class="home col-md-6 col-xs-6" style="font-weight: bold" ng-if="game.linescore.r.home > game.linescore.r.away">{{game.home_team_name}}</div>
+      <div class="home col-md-6 col-xs-6" ng-if="game.linescore.r.home < game.linescore.r.away || !game.linescore">{{game.home_team_name}}</div>
+      <div class="home-score col-md-6 col-xs-6">{{game.linescore.r.home}}</div>
+    </div>
+    <div class="row">
+      <div class="away col-md-6 col-xs-6" style="font-weight: bold" ng-if="game.linescore.r.home < game.linescore.r.away">{{game.away_team_name}}</div>
+      <div class="away col-md-6 col-xs-6" ng-if="game.linescore.r.home > game.linescore.r.away || !game.linescore">{{game.away_team_name}}</div>
+      <div class="away-score col-md-6 col-xs-6">{{game.linescore.r.away}}</div>
+    </div>
+    <div class="row">
+      <div class="status col-md-12 col-xs-12">{{game.status.status}}</div>
+    </div>
+    <div class="horizontal-divider" style="height: 1px;margin-top: 10px; border: 0; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0))" ng-show="game.home_team_name != null"></div>
+  </div>
+  <div class="row" id="error" ng-show="scoreboards[0] == undefined">
+      <div class="error-message col-md-12 col-xs-12">No games today</div>
+    </div>
+  <div class="row" id="server-error" style="display: none">
+    <div class="server-message col-md-12 col-xs-12">Server Error</div>
+  </div>
+</body>
+</html>
