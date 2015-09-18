@@ -5,6 +5,7 @@ var mlbApp = angular.module('mlbApp', ['scoreboardService']);
 mlbApp.controller('scoreboardController', ['$scope', 'getScore',
 
     function($scope, getScore) {
+        $scope.parseInt = parseInt;
         /* The function that updates the scoreboards */
         var updateScore = function(response) {
             var gameData = [];

@@ -27,13 +27,13 @@
   
   <div class="container" ng-repeat="game in scoreboards">
     <div class="row">
-      <div class="home col-md-6 col-xs-6" style="font-weight: bold" ng-if="game.linescore.r.home > game.linescore.r.away">{{game.home_team_name}}</div>
-      <div class="home col-md-6 col-xs-6" ng-if="game.linescore.r.home < game.linescore.r.away || !game.linescore">{{game.home_team_name}}</div>
+      <div class="home col-md-6 col-xs-6" style="font-weight: bold" ng-if="parseInt(game.linescore.r.home) > parseInt(game.linescore.r.away)">{{game.home_team_name}}</div>
+      <div class="home col-md-6 col-xs-6" ng-if="parseInt(game.linescore.r.home) <= parseInt(game.linescore.r.away) || !game.linescore">{{game.home_team_name}}</div>
       <div class="home-score col-md-6 col-xs-6">{{game.linescore.r.home}}</div>
     </div>
     <div class="row">
-      <div class="away col-md-6 col-xs-6" style="font-weight: bold" ng-if="game.linescore.r.home < game.linescore.r.away">{{game.away_team_name}}</div>
-      <div class="away col-md-6 col-xs-6" ng-if="game.linescore.r.home > game.linescore.r.away || !game.linescore">{{game.away_team_name}}</div>
+      <div class="away col-md-6 col-xs-6" style="font-weight: bold" ng-if="parseInt(game.linescore.r.home) < parseInt(game.linescore.r.away)">{{game.away_team_name}}</div>
+      <div class="away col-md-6 col-xs-6" ng-if="parseInt(game.linescore.r.home) >= parseInt(game.linescore.r.away) || !game.linescore">{{game.away_team_name}}</div>
       <div class="away-score col-md-6 col-xs-6">{{game.linescore.r.away}}</div>
     </div>
     <div class="row">
